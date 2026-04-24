@@ -452,77 +452,79 @@
   /* SPONSORS */
   .sponsors{
     background:var(--ecru-warm);
-    padding:140px 0 120px;
+    padding:88px 0 80px;
     position:relative;overflow:hidden;
     border-top:1px solid rgba(196,98,45,.18);
   }
-  .sponsors .container{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
-  .sponsors .label{display:block;margin-bottom:20px}
+  .sponsors .container{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start}
+  .sponsors .label{display:block;margin-bottom:14px}
   .sponsors h2{
     font-family:'Fraunces',serif;
-    font-size:clamp(40px,5vw,68px);
+    font-size:clamp(32px,3.6vw,48px);
     line-height:1;font-weight:300;letter-spacing:-.02em;
-    margin-bottom:24px;
+    margin-bottom:14px;
   }
   .sponsors h2 em{font-style:italic;font-weight:800;color:var(--sienna)}
   .sponsors .sub{
-    font-family:'Instrument Serif',serif;font-size:20px;
-    max-width:520px;line-height:1.5;color:var(--dark);
+    font-family:'Instrument Serif',serif;font-size:18px;
+    max-width:520px;line-height:1.45;color:var(--dark);
   }
   .sponsors .fit-list{
-    list-style:none;padding:0;margin-top:28px;
-    display:flex;flex-direction:column;gap:10px;
-    font-family:'Space Mono',monospace;font-size:11px;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--dark);
+    list-style:none;padding:0;margin-top:20px;
+    display:flex;flex-wrap:wrap;gap:8px;
+    font-family:'Space Mono',monospace;font-size:10px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--dark);
   }
-  .sponsors .fit-list li{display:flex;gap:12px;align-items:center}
+  .sponsors .fit-list li{
+    display:inline-flex;gap:8px;align-items:center;
+    padding:6px 12px;background:var(--ecru);border:1px solid rgba(28,25,23,.12);
+  }
   .sponsors .fit-list .dot{
-    width:6px;height:6px;background:var(--sienna);flex-shrink:0;
+    width:5px;height:5px;background:var(--sienna);flex-shrink:0;
   }
 
-  .perks{margin-top:48px}
-  .perks-label{display:block;margin-bottom:22px}
-  .perks-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:22px}
+  .perks{margin-top:28px}
+  .perks-label{display:block;margin-bottom:14px}
+  .perks-list{
+    list-style:none;padding:0;margin:0;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  }
   .perks-list li{
-    display:grid;grid-template-columns:54px 1fr;gap:18px;align-items:start;
-    padding-top:20px;border-top:1px solid rgba(74,155,142,.3);
+    display:block;
+    padding:14px 0 0;border-top:1px solid rgba(74,155,142,.35);
   }
   .perk-num{
-    font-family:'Space Mono',monospace;font-size:12px;
+    font-family:'Space Mono',monospace;font-size:10px;
     letter-spacing:.22em;color:var(--verdigris);
-    padding-top:4px;
+    display:block;margin-bottom:6px;
   }
   .perks-list h4{
     font-family:'Fraunces',serif;font-weight:400;font-style:italic;
-    font-size:22px;line-height:1.2;color:var(--dark);
-    margin-bottom:6px;letter-spacing:-.01em;
-  }
-  .perks-list p{
-    font-family:'Instrument Serif',serif;font-size:17px;line-height:1.45;
-    color:var(--dark);opacity:.88;
+    font-size:16px;line-height:1.2;color:var(--dark);
+    letter-spacing:-.005em;
   }
 
   .sponsor-contact{
-    display:flex;flex-direction:column;gap:20px;
-    padding:48px 40px;
+    display:flex;flex-direction:column;gap:14px;
+    padding:28px 26px;
     background:var(--ecru);
     border:1px solid rgba(28,25,23,.12);
     position:relative;
   }
   .sponsor-contact::before{
     content:"✦";
-    position:absolute;top:16px;right:20px;
-    font-family:'Fraunces',serif;font-size:22px;
+    position:absolute;top:12px;right:16px;
+    font-family:'Fraunces',serif;font-size:18px;
     color:var(--sienna);
     animation:starSpin 14s linear infinite;
   }
   .sponsor-email{
     font-family:'Fraunces',serif;font-style:italic;
-    font-size:clamp(20px,2vw,24px);font-weight:400;
+    font-size:clamp(17px,1.6vw,20px);font-weight:400;
     color:var(--sienna);text-decoration:none;line-height:1.2;
     letter-spacing:-.005em;
     border-bottom:2px solid var(--sienna);
-    padding-bottom:6px;align-self:flex-start;
+    padding-bottom:4px;align-self:flex-start;
     transition:color .2s ease,border-color .2s ease;
     word-break:break-all;
   }
@@ -548,7 +550,8 @@
     .quote-grid{grid-template-columns:repeat(2,1fr)}
     .city-grid{grid-template-columns:1fr}
     .host-grid{grid-template-columns:1fr;gap:36px}
-    .sponsors .container{grid-template-columns:1fr;gap:44px}
+    .sponsors .container{grid-template-columns:1fr;gap:32px}
+    .perks-list{grid-template-columns:1fr;gap:10px}
     .host-photo{width:220px;height:220px}
     .hero{min-height:auto;padding:110px 0 90px}
     .hero-content{width:100%;max-width:none}
@@ -954,24 +957,15 @@
         <ol class="perks-list">
           <li>
             <span class="perk-num">01</span>
-            <div>
-              <h4>Native integration, not just sponsor logos (but that too!)</h4>
-              <p>Co-hosted tables, branded workshops, real product moments built into the format — with editorial care.</p>
-            </div>
+            <h4>Native integration — co-hosted tables &amp; branded moments.</h4>
           </li>
           <li>
             <span class="perk-num">02</span>
-            <div>
-              <h4>Honest founder feedback.</h4>
-              <p>Candid product input, beta testing, and case-study-worthy conversations with your ideal customers.</p>
-            </div>
+            <h4>Honest founder feedback &amp; case-study-worthy conversations.</h4>
           </li>
           <li>
             <span class="perk-num">03</span>
-            <div>
-              <h4>Cross-market reach &amp; content.</h4>
-              <p>Presence across Boston, NYC, LA, and SF — plus editorial recap content, photo, and social co-amplification from every event.</p>
-            </div>
+            <h4>Cross-market reach across Boston, NYC, LA &amp; SF.</h4>
           </li>
         </ol>
       </div>
