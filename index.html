@@ -48,10 +48,41 @@
     padding:90px 0 80px;overflow:hidden;position:relative;
     display:flex;align-items:center;
   }
+  .hero-video{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:0;pointer-events:none;
+    filter:brightness(1.28) saturate(1.10) contrast(1.0);
+  }
+  .hero-overlay{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(28,25,23,.40) 0%, rgba(28,25,23,.05) 55%, rgba(28,25,23,0) 100%),
+      linear-gradient(180deg, rgba(28,25,23,0) 72%, rgba(28,25,23,.18) 100%);
+  }
+  .hero-table{display:none !important}
+  .hero h1, .hero .sub, .hero .eyebrow{
+    text-shadow:
+      0 2px 12px rgba(0,0,0,.55),
+      0 1px 2px rgba(0,0,0,.6);
+  }
+  .hero-content::before{
+    content:"";position:absolute;
+    inset:-40px -100px -40px -180px;
+    background:linear-gradient(
+      105deg,
+      rgba(28,25,23,.78) 0%,
+      rgba(28,25,23,.66) 40%,
+      rgba(28,25,23,.30) 75%,
+      rgba(28,25,23,0) 100%
+    );
+    z-index:-1;pointer-events:none;
+    filter:blur(.5px);
+  }
+  .hero-content{position:relative;z-index:5}
   .hero-table{
     position:absolute;right:-4%;top:58%;
     width:65%;max-width:900px;
-    opacity:.4;z-index:2;
+    opacity:.22;z-index:2;
     filter:drop-shadow(0 0 .7px var(--ecru));
     animation:
       tableFloat 6s ease-in-out infinite alternate 2.8s,
@@ -70,8 +101,8 @@
     to{rotate:.8deg}
   }
   @keyframes tablePulse{
-    0%,100%{opacity:.32}
-    50%{opacity:.55}
+    0%,100%{opacity:.18}
+    50%{opacity:.32}
   }
   .hero-table path,.hero-table line,.hero-table ellipse,.hero-table polyline{
     stroke:var(--ecru);fill:none;stroke-linecap:round;stroke-linejoin:round;
@@ -161,19 +192,44 @@
 
   .pain-list{
     list-style:none;display:grid;grid-template-columns:repeat(3,1fr);
-    gap:24px;margin:0 0 64px;padding:0;
+    gap:28px 24px;margin:0;padding:0;
   }
   .pain-list li{
-    display:flex;gap:16px;align-items:flex-start;
-    padding:22px 22px 22px 20px;
-    background:transparent;
-    border-top:1px solid var(--sienna);
+    position:relative;
+    padding:30px 28px 28px;
+    background:var(--ecru-warm);
+    border-top:3px solid var(--accent,var(--sienna));
+    display:flex;flex-direction:column;gap:10px;
+    transition:transform .25s ease, box-shadow .25s ease;
+    overflow:hidden;
   }
-  .pain-emoji{font-size:22px;line-height:1.2;flex-shrink:0}
+  .pain-list li:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 32px rgba(28,25,23,.10);
+  }
+  .pain-list li::after{
+    content:"✦";
+    position:absolute;top:18px;right:20px;
+    font-family:'Fraunces',serif;font-size:16px;
+    color:var(--accent,var(--sienna));opacity:.55;
+    animation:starSpin 14s linear infinite;
+  }
+  .pain-num{
+    font-family:'Space Mono',monospace;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent,var(--sienna));
+  }
+  .pain-list h3{
+    font-family:'Fraunces',serif;font-style:normal;font-weight:600;
+    font-size:clamp(20px,2.1vw,26px);line-height:1.15;
+    letter-spacing:-.01em;color:var(--dark);
+  }
+  .pain-list h3 em{font-style:normal;font-weight:800;color:var(--accent,var(--sienna))}
   .pain-list p{
     font-family:'Instrument Serif',serif;
-    font-size:19px;line-height:1.4;color:var(--dark);
+    font-size:17px;line-height:1.45;color:var(--dark);opacity:.82;margin:0;
   }
+  .pain-list li{--accent:var(--sienna)}
 
   .quote-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;
@@ -391,6 +447,102 @@
   }
   .city-card:hover .city-underline{transform:scaleX(1)}
 
+  /* SOCIAL PROOF */
+  .social-proof{
+    background:var(--ecru-warm);
+    padding:120px 0 110px;
+    position:relative;overflow:hidden;
+    border-top:1px solid rgba(196,98,45,.18);
+  }
+  .social-proof .section-head{margin-bottom:56px;max-width:760px}
+  .social-proof .label{display:block;margin-bottom:20px}
+  .social-proof h2{
+    font-family:'Fraunces',serif;font-size:clamp(38px,5vw,68px);
+    line-height:1.05;letter-spacing:-.015em;font-weight:300;margin-bottom:22px;
+  }
+  .social-proof h2 em{font-style:italic;font-weight:800;color:var(--sienna)}
+  .social-proof .sub{
+    font-family:'Instrument Serif',serif;font-size:20px;
+    max-width:600px;color:var(--dark);line-height:1.45;
+  }
+
+  /* Polaroid grid */
+  .polaroids{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:36px 22px;margin:0 auto 64px;
+    max-width:980px;padding:8px 0 12px;
+  }
+  .polaroid{
+    background:#FAFAF6;
+    padding:14px 14px 52px;
+    box-shadow:
+      0 1px 1px rgba(28,25,23,.05),
+      0 8px 22px rgba(28,25,23,.18),
+      0 18px 40px rgba(28,25,23,.10);
+    transform:rotate(var(--rot,-2deg));
+    transition:transform .3s ease,box-shadow .3s ease,z-index 0s linear .3s;
+    position:relative;will-change:transform;
+  }
+  .polaroid:hover{
+    transform:rotate(0) scale(1.05);
+    box-shadow:0 12px 30px rgba(28,25,23,.22),0 28px 60px rgba(28,25,23,.18);
+    z-index:5;
+    transition:transform .3s ease,box-shadow .3s ease;
+  }
+  .polaroid-img{
+    aspect-ratio:1/1;
+    width:100%;background:var(--dark);overflow:hidden;
+    position:relative;
+  }
+  .polaroid-img img{
+    display:block;width:100%;height:100%;object-fit:cover;
+  }
+  .polaroid-cap{
+    position:absolute;left:0;right:0;bottom:16px;
+    text-align:center;
+    font-family:'Space Mono',monospace;font-style:normal;font-weight:700;
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--dark);
+    pointer-events:none;
+  }
+  .polaroid:nth-child(1){--rot:-3deg;margin-top:8px}
+  .polaroid:nth-child(2){--rot:2deg;margin-top:-12px}
+  .polaroid:nth-child(3){--rot:-1.5deg;margin-top:18px}
+  .polaroid:nth-child(4){--rot:2.5deg;margin-top:-6px}
+  .polaroid:nth-child(5){--rot:-2deg;margin-top:14px}
+  .polaroid:nth-child(6){--rot:1.5deg;margin-top:-10px}
+
+  /* Quote cards — uniform, name-only */
+  .proof-quotes{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:16px;max-width:1240px;margin:0 auto;
+    align-items:stretch;
+  }
+  .proof-q{
+    background:var(--ecru);padding:24px 22px 22px;
+    border-top:3px solid var(--verdigris);
+    display:flex;flex-direction:column;justify-content:space-between;gap:18px;
+    transition:transform .22s ease,box-shadow .22s ease;
+    position:relative;min-height:200px;
+  }
+  .proof-q:nth-child(2){border-top-color:var(--saffron)}
+  .proof-q:nth-child(3){border-top-color:var(--mauve)}
+  .proof-q:nth-child(4){border-top-color:var(--sienna)}
+  .proof-q:nth-child(5){border-top-color:var(--verdigris)}
+  .proof-q:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(28,25,23,.10)}
+  .proof-q p{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:15px;line-height:1.45;color:var(--dark);
+    letter-spacing:-.005em;
+  }
+  .proof-q p em{font-style:italic;color:var(--sienna)}
+  .proof-q cite{
+    font-family:'Space Mono',monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;font-style:normal;
+    color:var(--dark);opacity:.82;font-weight:700;
+  }
+
   /* WAITLIST */
   .waitlist{background:var(--ecru);padding:140px 0;position:relative}
   .waitlist .section-head{margin-bottom:48px;max-width:720px;position:relative}
@@ -543,8 +695,8 @@
 
   /* MOBILE */
   @media (max-width:900px){
-    .pain-list{grid-template-columns:1fr;gap:0}
-    .pain-list li{border-top:1px solid var(--sienna)}
+    .pain-list{grid-template-columns:1fr;gap:14px}
+    .pain-list li{padding:24px 22px}
     .types-grid{grid-template-columns:repeat(2,1fr)}
     .types-grid .type-card,.types-grid .type-card.top{grid-column:span 1}
     .quote-grid{grid-template-columns:repeat(2,1fr)}
@@ -556,8 +708,17 @@
     .hero{min-height:auto;padding:110px 0 90px}
     .hero-content{width:100%;max-width:none}
     .hero-mark{width:54px;top:28px}
-    .hero-table{width:130%;right:-30%;opacity:.22}
+    .hero-table{width:130%;right:-30%;opacity:.14}
     .hero h1{font-size:clamp(44px,11vw,72px)}
+
+    .polaroids{grid-template-columns:repeat(2,1fr);gap:24px 14px;max-width:520px}
+    .polaroid{padding:10px 10px 40px}
+    .polaroid-cap{font-size:15px;bottom:10px}
+    .proof-quotes{grid-template-columns:repeat(2,1fr);gap:12px}
+  }
+  @media (max-width:1100px){
+    .pain-list{grid-template-columns:repeat(2,1fr)}
+    .proof-quotes{grid-template-columns:repeat(3,1fr)}
   }
   @media (max-width:600px){
     .container{padding:0 22px}
@@ -565,6 +726,14 @@
     .types-grid{grid-template-columns:1fr}
     .quote-grid{grid-template-columns:1fr}
     .hero{padding:100px 0 80px}
+    /* prefer poster-as-bg over autoplay video on small phones */
+    .hero-video{display:none}
+    .hero{
+      background:#1C1917 url('media/hero-poster.jpg') center/cover no-repeat;
+    }
+    .social-proof{padding:80px 0 70px}
+    .polaroids{grid-template-columns:1fr;max-width:300px;margin-bottom:48px}
+    .proof-quotes{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -581,6 +750,12 @@
 
 <!-- HERO -->
 <header class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+         poster="media/hero-poster.jpg" aria-hidden="true">
+    <source src="media/hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
   <svg class="grain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="100%" height="100%" filter="url(#noise)"/>
   </svg>
@@ -662,6 +837,65 @@
   </div>
 </div>
 
+<!-- SOCIAL PROOF -->
+<section class="social-proof" id="social-proof">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>What it felt like <em>in the room.</em></h2>
+    </div>
+
+    <div class="polaroids reveal">
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-group.jpg" alt="Group photo of attendees standing together in front of the CIAO! sign" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">the crew</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-table.jpg" alt="Long oval table set with greenery, candles, place cards, and a CIAO! sign" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">setting the table</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-dinner.jpg" alt="Mid-dinner: founders laughing, eating, candles glowing" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">mid-course</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-candles.jpg" alt="Close-up of candlelight, the blue Saratoga bottle, and greenery" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">candlelight</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-room.jpg" alt="Wide view of the dining room with everyone seated and the CIAO! sign behind" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">the room</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <div class="polaroid-img"><img src="media/photo-shelves.jpg" alt="Side view of The Aperitivo Shop with shelves, signage, and founders mid-conversation" loading="lazy" /></div>
+        <figcaption class="polaroid-cap">the shop</figcaption>
+      </figure>
+    </div>
+
+    <div class="proof-quotes">
+      <article class="proof-q reveal">
+        <p>"Loved spending the evening strategizing, laughing, and troubleshooting. Excited to see where <em>We Built This</em> goes next."</p>
+        <cite>Madi Beumee</cite>
+      </article>
+      <article class="proof-q reveal">
+        <p>"Thank you for curating such a special evening. Loved the cozy vibes and sharp thinking. <em>More of this please!</em>"</p>
+        <cite>Lauren Prentiss</cite>
+      </article>
+      <article class="proof-q reveal">
+        <p>"Thank you so much for having me. It was an <em>amazing night,</em> with even more amazing conversations."</p>
+        <cite>Gabrielle Waxenberg</cite>
+      </article>
+      <article class="proof-q reveal">
+        <p>"<em>Such a wonderful idea, venue, and group.</em> I really enjoyed meeting everyone!"</p>
+        <cite>Heather Hardy</cite>
+      </article>
+      <article class="proof-q reveal">
+        <p>"What a good vibe — <em>this is amazing.</em>"</p>
+        <cite>Carly Valancy</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- WHY -->
 <section class="why">
   <div class="container">
@@ -671,41 +905,37 @@
     </div>
 
     <ul class="pain-list reveal">
-      <li><p>Not a product-based founder, so can't go to the really cool hype breakfasts and dinners in the startup scene.</p></li>
-      <li><p>Not really raising money, so can't get in the same room and conversations with VCs for partnerships.</p></li>
-      <li><p>Not taken seriously as an actual founder — and still struggling with biz dev, getting customers, capacity planning, and pitching yourself.</p></li>
+      <li>
+        <span class="pain-num">No. 01</span>
+        <h3>Not <em>"product-y"</em> enough.</h3>
+        <p>Demo days, hype breakfasts, founder dinners — all built around the next SaaS unicorn, not the consulting practice you've spent years building.</p>
+      </li>
+      <li>
+        <span class="pain-num">No. 02</span>
+        <h3>Not <em>raising.</em></h3>
+        <p>VCs aren't writing checks for bootstrapped service businesses, so you're locked out of the rooms where real partnerships and intros happen.</p>
+      </li>
+      <li>
+        <span class="pain-num">No. 03</span>
+        <h3>Underestimated as a <em>real founder.</em></h3>
+        <p>You hire, sell, deliver, scope, and ship — without the cap table, the pitch deck, or the headlines to prove it.</p>
+      </li>
+      <li>
+        <span class="pain-num">No. 04</span>
+        <h3>Pricing yourself is <em>still a guess.</em></h3>
+        <p>Nobody published the playbook for retainer math, scoping change-orders, or the right rate when a client says "let's keep going."</p>
+      </li>
+      <li>
+        <span class="pain-num">No. 05</span>
+        <h3>No <em>co-founder energy.</em></h3>
+        <p>You're the only one looking at the P&amp;L, the proposal, and the late-night Slack thread.</p>
+      </li>
+      <li>
+        <span class="pain-num">No. 06</span>
+        <h3>Conferences are <em>pitch-fests.</em></h3>
+        <p>You came for operator wisdom. You got 90 minutes of someone selling Series A optimism and a swag bag of QR codes.</p>
+      </li>
     </ul>
-
-    <div class="quote-grid">
-      <span class="floating-star" style="top:30%;left:33%;--rd:8s">✦</span>
-      <span class="floating-star" style="top:58%;left:66%;--rd:6s;font-size:18px">✦</span>
-      <span class="floating-star" style="top:80%;left:12%;--rd:10s;font-size:26px">✦</span>
-
-      <article class="quote reveal tall">
-        <p>"Creating the thing you're missing, and having it sell out, is the best feeling. I know how fruitful coming together IRL can be."</p>
-        <cite>— Founder, Bookkeeping &amp; Operations</cite>
-      </article>
-      <article class="quote reveal">
-        <p>"I never felt too connected to the startup culture, personally. I feel like us solo service business founders are in our own little — and expanding — niche."</p>
-        <cite>— Fractional Founder</cite>
-      </article>
-      <article class="quote reveal short">
-        <p>"Expected nothing less — you saw a gap and immediately created a community to solve for it."</p>
-        <cite>— Sr. UX Content Strategist</cite>
-      </article>
-      <article class="quote reveal short">
-        <p>"I love seeing this, and want more of it in the world."</p>
-        <cite>— Fractional Operator</cite>
-      </article>
-      <article class="quote reveal tall">
-        <p>"This is wonderful and much needed. If there's ever an option to stream for non-Boston folks, I'm there."</p>
-        <cite>— Strategy Partner, Early-Stage Startups</cite>
-      </article>
-      <article class="quote reveal">
-        <p>"Can't believe — or really I can — how quickly this filled up. Wait list!"</p>
-        <cite>— Wingwoman to Founders &amp; CEOs</cite>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -777,37 +1007,11 @@
     <span class="rule" id="events-rule"></span>
 
     <div class="city-grid">
-      <article class="city-card reveal" data-city="Boston">
-        <svg class="grain"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
-        <div class="city-head">
-          <span class="label label-verdigris">City No. 01</span>
-          <span class="badge badge-full">At Capacity</span>
-        </div>
-        <svg class="city-svg" viewBox="0 0 400 140" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
-          <polyline points="0,120 30,120 30,90 55,90 55,120 85,120 85,85 115,85 115,120 145,120 145,78 175,78 175,120"/>
-          <line x1="40" y1="90" x2="40" y2="80"/>
-          <line x1="98" y1="85" x2="98" y2="74"/>
-          <polyline points="200,120 200,30 260,30 260,120"/>
-          <line x1="215" y1="40" x2="215" y2="118"/>
-          <line x1="230" y1="40" x2="230" y2="118"/>
-          <line x1="245" y1="40" x2="245" y2="118"/>
-          <polyline points="275,120 275,70 310,70 310,120"/>
-          <polyline points="325,120 325,60 340,45 355,60 355,120"/>
-          <line x1="0" y1="120" x2="400" y2="120"/>
-        </svg>
-        <div class="city-meta">
-          <div class="city-name">Boston, MA</div>
-          <div class="city-date">April 30, 2025 · Apertivo, North End</div>
-          <button class="city-cta" type="button" data-scroll="Boston">→ Follow for updates</button>
-        </div>
-        <span class="city-underline"></span>
-      </article>
-
       <a class="city-card-link" href="https://luma.com/nvb7sh0r" target="_blank" rel="noopener">
       <article class="city-card reveal" data-city="New York">
         <svg class="grain"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
         <div class="city-head">
-          <span class="label label-verdigris">City No. 02</span>
+          <span class="label label-verdigris">City No. 01</span>
           <span class="badge badge-open">Event Open</span>
         </div>
         <svg class="city-svg" viewBox="0 0 400 140" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
@@ -827,7 +1031,7 @@
         </svg>
         <div class="city-meta">
           <div class="city-name">New York, NY</div>
-          <div class="city-date">Late May 2025 · Venue TBA</div>
+          <div class="city-date">May 14, 2026 · Venue TBA</div>
           <span class="city-cta">→ Grab your seat</span>
         </div>
         <span class="city-underline"></span>
@@ -838,7 +1042,7 @@
       <article class="city-card reveal" data-city="Los Angeles">
         <svg class="grain"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
         <div class="city-head">
-          <span class="label label-verdigris">City No. 03</span>
+          <span class="label label-verdigris">City No. 02</span>
           <span class="badge badge-open">Event Open</span>
         </div>
         <svg class="city-svg" viewBox="0 0 400 140" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
@@ -873,7 +1077,7 @@
       <article class="city-card reveal" data-city="San Francisco">
         <svg class="grain"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
         <div class="city-head">
-          <span class="label label-verdigris">City No. 04</span>
+          <span class="label label-verdigris">City No. 03</span>
           <span class="badge badge-open">Event Open</span>
         </div>
         <svg class="city-svg" viewBox="0 0 400 140" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
